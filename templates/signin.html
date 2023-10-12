@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<div class="container-fluid" style="margin-top: 5rem">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Login</h2>
+        <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="background-color: gainsboro; width: 10rem">Login</button>
+        </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid" style="margin-top: 5rem">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card text-center">
+                <div class="card-header"><h4>{{ task.role }}</h4></div>
+                <div class="card-body">
+                    <div class="card-title"><h2>{{ task }}</h2></div>
+                    <div class="card-text">
+                        <p><b>valid from {{ task.start_date }} to {{ task.end_date }}</b></p>
+                        <p>{{ task.desc }}</p>
+                    </div>
+                    <a href="{% url 'solve-task' project_id=task.project_id_id task_id=task.task_id %}"><button class="btn btn-primary">Solve</button></a>
+                    {% if role.modify_tasks %}
+                        <button class="btn btn-primary">Modify</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <table class="table table-primary text-center">
+                {% for solution in solutions %}
+                    <tr>
+                        <td>{{ solution.post_date }}</td>
+                        <td>{{ solution.author }}</td>
+                        <td>{{ solution.comments }}</td>
+                        <td><a href="{{ solution.content.url }}" download>{{ solution.content.url }}</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

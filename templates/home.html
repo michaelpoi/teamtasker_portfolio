@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<div class="container-fluid" style="margin-top: 5rem">
+    <div class="row bg-primary">
+        <h1 class="text-center">Home Page</h1>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-10 text-center">
+            <h2>What is TeamTasker?</h2>
+            <p class="h4">TeamTasker is a platform for easy and powerful project management.</p>
+            <div class="card text-center">
+                <div class="card-body">
+                    <div class="card-header"><h2>Goals of the project.</h2></div>
+                    <div class="card-text h3">
+                        <ul>
+                            <li>Create sign-in and sign-up.</li>
+                            <li>Implement possibility to create projects.</li>
+                            <li>Display projects to user.</li>
+                            <li>Store tasks for each project.</li>
+                            <li>Correctly display tasks for user and project.</li>
+                            <li>Allow user to create tasks.</li>
+                            <li>Create role system which will be unique for each project.</li>
+                            <li>Change available options and displayed content based on role.</li>
+                            <li>Give user a possibility to customize role system.</li>
+                            <li>Allow user to invite participants for project.</li>
+                            <li>Display users notification and handle actions for them.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center" style="margin-top: 5rem">
+                <h2>Database diagram (default Django tables are not here)</h2>
+                <div class="col-md-6" >
+                    <img class="img" src='../media/images/db.png' alt="no img" style="height: 50rem">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

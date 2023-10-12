@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content%}
+    <div class="container-fluid" style="margin-top: 5rem">
+    <div class="row">
+        <div class="col-md-10 text-center">
+            <h1 class="text-center">{{ project.name }} ({{ role.name }})</h1>
+            {% if role.modify_users %}
+                <a href="{% url 'modify-roles' project_id=project.project_id %}"><button class="btn btn-primary">Modify roles</button></a>
+            {% endif %}
+            {% if role.modify_tasks %}
+                <a href="{% url 'create-task' project_id=project.project_id %}"><button class="btn btn-primary">Add task</button></a>
+            {% endif %}
+            <div class="row bg-warning my-3">
+                <p class="text-center"><b>from {{ project.start_date }} till {{ project.end_date }}</b></p>
+                <p class="text-center">{{ project.desc }}</p>
+            </div>
+
+            <div class="row my-3">
+                {% if tasks.count != 0 %}
+                <div id="taskCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for task in tasks %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <div class="card text-center">
+                                <div class="card-header">{{ task.role }}</div>
+                                <div class="card-body">
+                                    <div class="card-title"><h2>{{ task.name }}</h2></div>
+                                    <div class="card-text"><p>{{ task.desc }}</p></div>
+                                    <a href={% url 'task_detail' project_id=project.project_id task_id=task.task_id %}><button class="btn btn-primary">Explore</button></a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <a class="carousel-control-prev" href="#taskCarousel" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only" style="color: black">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#taskCarousel" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only" style="color: black">Next</span>
+                    </a>
+                </div>
+            {% else %}
+                <h1 class="text-center">No tasks yet</h1>
+                    {% if role.modify_tasks %}
+                        <a href="#"><button class="btn btn-primary">Add new</button> </a>
+                        {% endif %}
+            {% endif %}
+            </div>
+        </div>
+    <div class="col-md-2 text-center">
+        <h1 class="text-center">Users</h1>
+        {% if role.modify_users %}
+            <a href="{% url 'add_user' project_id=project.project_id %}"><button class="btn btn-primary">Add user</button></a>
+            <button class="btn btn-primary">Kick user</button>
+        {% endif %}
+        {% for user in users %}
+            <div class="card border-0 rounded-3 bg-warning my-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ role }}</h5>
+            <p class="card-text">{{ user.username }}</p>
+            <p class="card-text"></p>
+        </div>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+    </div>
+
+
+{% endblock %}

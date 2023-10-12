@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid" style="margin-top: 5rem">
+    <div class="row bg-primary my-3">
+        <h1 class="text-center">Hello {{ user }}</h1>
+    </div>
+    <h1 class="text-center">Your projects</h1>
+    <div class="row bg-info justify-content-center">
+        {% for project in projects %}
+        <div class="col-md-3">
+               <div class="card text-center m-3">
+  <div class="card-header">
+    {{ project.workfor__role__name}}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title" style={font-size:25px}>{{ project.name }}</h5>
+    <p class="card-text" style={font-size:17px}>{{ project.desc }}</p>
+      <a href="{% url 'project_detail' project_id=project.project_id %}"><button class="btn btn-primary">GO</button></a>
+  </div>
+  <div class="card-footer text-muted" style={font-size:20px}>
+    Project period: from <b>{{ project.start_date }}</b> to <b>{{ project.end_date }}</b>
+  </div>
+</div>
+        </div>
+        {% endfor %}
+    </div>
+    <h1 class="text-center">Your tasks</h1>
+    <div class="row bg-warning justify-content-center">
+        {% for task in tasks %}
+            <div class="col-md-3">
+            <div class="card text-center m-3">
+                <div class="card-header">{{ task.role }}</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ task.name }}</h5>
+                    <p class="card-text">{{ task.desc }}</p>
+                    <a href="{% url 'task_detail' project_id=task.project_id_id task_id=task.task_id %}"><button class="btn btn-primary">GO</button> </a>
+                </div>
+                <div class="card-footer text-muted" style="font-size: 17px">
+                    Project period: from <b>{{ task.start_date }}</b> to <b>{{ task.end_date }}</b>
+                </div>
+            </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

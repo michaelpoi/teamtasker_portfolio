@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid" style="margin-top: 5rem">
+{% if invites.count == 0 %}
+<h1 class="text-center">No notifications</h1>
+{% endif %}
+    {% for invite in invites %}
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+
+                <div class="card text-center">
+                    <div class="card-body">
+                        <div class="card-text">User {{ invite.user_from__username }}
+                            invites you to the project {{ invite.project__name }} as {{ invite.role__name }}
+                        </div>
+                            <a href="{% url 'accept_invite' id=invite.id %}"><button class="btn btn-primary">Accept</button></a>
+                            <a href="{% url 'reject_invite' id=invite.id %}"><button class="btn btn-primary">Reject</button></a>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    {% endfor %}
+    </div>
+
+
+{% endblock %}
